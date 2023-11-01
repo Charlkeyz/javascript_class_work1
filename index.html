@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const presentYear = Number(prompt("Enter the present year"))
+                const birthYear = Number(prompt("Enter your birth year"))
+                function daysInAge (presentYear, birthYear) {
+                    const formula = presentYear - birthYear;
+                    const result = formula * 365;
+                    if (result < 10000) {
+                        return alert("you are young")
+                    } else {
+                        return alert("you are old")
+                    }
+                }
+                daysInAge();
+    </script>
+</body>
+</html>
