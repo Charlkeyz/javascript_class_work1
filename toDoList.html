@@ -26,9 +26,8 @@
             /* flex-direction: column; */
             justify-content: space-between;
         }
-        #complete{
-            background-color: green;
-        }
+        
+        
         #delete-all{
             margin-top: 10px;
         }
@@ -39,7 +38,6 @@
         const insertedToDos = document.getElementById("insertedToDos")
         const displayToDos = document.getElementById("displayToDos")
         const deleteAll = document.getElementById("delete-all")
-        // const completed = document.getElementById("complete")
         // const deleteButton = document.getElementById("deleteButton")
         let toDoList = [];
         let toDoItems = "";
@@ -73,9 +71,10 @@
             toDoList.splice(i, 1);
             addFunc()
         }
-        function deleteAllItems(clearItem){
-           
+        function deleteAllItems(){
+           toDoList = [];
            displayToDos.innerHTML = []
+
         }
         // Push items to your toDos list
         function pushFunc() {
@@ -97,11 +96,16 @@
             toDoList[index] = inputToDos.value;
             console.log(toDoList[index])
             addFunc()
-            inputToDos.value = "";
+            inputToDos.value = "";  
 
         }
         function complete(i){
-            displayToDos[i].style.backgroundColor = "green"
+            const completed = document.getElementById("complete")
+            const footerBox = document.getElementById("footer")
+            completed.innerText = "completed"
+            footerBox.style.backgroundColor = "green"
+
+            
 
 
             
