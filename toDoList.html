@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="toDos">
+        <button id="addButton">Add</button>
+        <div id="displayToDos">
+            
+        </div>
+        <button id="delete-all">Delete All</button>
+
+         
+    </div>
+    <style>
+        #footer{
+            background-color: aqua;
+            width: 10%;
+            height: 40px;
+            display: flex;
+            margin-top: 20px;
+            /* flex-direction: column; */
+            justify-content: space-between;
+        }
+        #complete{
+            background-color: green;
+        }
+        #delete-all{
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        const inputToDos = document.getElementById("toDos")
+        const addButton = document.getElementById("addButton")
+        const insertedToDos = document.getElementById("insertedToDos")
+        const displayToDos = document.getElementById("displayToDos")
+        const deleteAll = document.getElementById("delete-all")
+        // const completed = document.getElementById("complete")
+        // const deleteButton = document.getElementById("deleteButton")
+        let toDoList = [];
+        let toDoItems = "";
+        let index;
+        let isEditing = false
+        clearItem = 0;
+        
+        
+        
+
+        inputToDos.addEventListener("input", inputFunc)
+        addButton.addEventListener("click", addOrEditItem)
+        deleteAll.addEventListener("click", deleteAllItems)
+
+
+        function addOrEditItem(){
+            if(isEditing === false){
+                pushFunc()
+            }else{
+                editedItem()
+            }
+        }
+        function inputFunc(e) {
+            toDoItems = e.currentTarget.value
+            // console.log(toDoItems)
+        
+        }
+        // Deleting items in your ToDos list
+        function deleteItem(i) {
+            // console.log(i)
+            toDoList.splice(i, 1);
+            addFunc()
+        }
+        function deleteAllItems(clearItem){
+           
+           displayToDos.innerHTML = []
+        }
+        // Push items to your toDos list
+        function pushFunc() {
+            toDoList.push(toDoItems)
+            // console.log(toDoList)
+            addFunc()
+            inputToDos.value = "";
+        }
+        function editItem(i) {
+            // console.log(i)
+            isEditing = true
+            inputToDos.value = toDoList[i]
+        
+                addButton.innerText = "Edit"
+                index = i;    
+        }
+        function editedItem() {
+
+            toDoList[index] = inputToDos.value;
+            console.log(toDoList[index])
+            addFunc()
+            inputToDos.value = "";
+
+        }
+        function complete(i){
+            displayToDos[i].style.backgroundColor = "green"
+
+
+            
+        }
+        
+    
+
+        function addFunc(){
+            displayToDos.innerHTML = "";
+            addButton.innerText = "Add"
+            for(let i = 0; i < toDoList.length; i++){
+                const template = `<div id="footer">
+            <p id="insertedToDos" onclick= "editItem(${i})">${toDoList[i]}</p>
+            <button id="complete" onclick="complete(${i})">Complete</button> 
+            <button id="deleteButton" onclick="deleteItem(${i})">X</button> 
+        </div>` 
+                displayToDos.innerHTML += template;
+
+                
+                
+                 
+            }
+    
+        }
+        
+        
+    </script>
+</body>
+</html>
